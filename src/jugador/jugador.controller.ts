@@ -10,8 +10,7 @@ import { crearJugadorDTO } from './jugador.DTO';
 export class JugadorController { 
     constructor(private readonly jugadorService: JugadorService) {}
     @Post()
-    crearJugador(@Body() crearJugador: crearJugadorDTO){
-        console.log("RespuestaCrearJugador", crearJugador)
-        return; 
+    async crearJugador(@Body() crearJugador: crearJugadorDTO){
+        return await this.jugadorService.guardarJugador(crearJugador); 
     }
 }

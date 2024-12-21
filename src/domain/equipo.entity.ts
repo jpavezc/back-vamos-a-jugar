@@ -1,7 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from 'typeorm';
+import { Jugador } from './jugador.entity';
+import { Campeonato } from './campeonato.entity';
 
-@Entity('Equipo')
-export class EquipoEntity {
+@Entity('equipo')
+export class Equipo {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -16,4 +18,11 @@ export class EquipoEntity {
 
   @Column()
   ciudad: string;
+
+  @ManyToMany(() => Jugador)
+  @JoinTable({ name: 'equipo_jugador' })
+  jugadores: Jugador[];
+
+  @ManyToMany(() => Campeonato)
+  campeonatos: Campeonato[];
 }

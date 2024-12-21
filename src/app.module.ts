@@ -1,12 +1,16 @@
-import { JugadorModule } from './jugador/jugador.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { EquipoModule } from './equipos/equipo.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { EquipoEntity } from './domain/equipo.entity';
+import { Equipo } from './domain/equipo.entity';
 import { equipoService } from './equipos/equipo.service';
 import { equipoController } from './equipos/equipo.controller';
+import { JugadorController } from './jugador/jugador.controller';
+import { JugadorService } from './jugador/jugador.service';
+import { Jugador } from './domain/jugador.entity';
+import { Campeonato } from './domain/campeonato.entity';
+import { Partido } from './domain/partido.entity';
+import { Resultado } from './domain/resultado.entity';
 
 
 @Module({
@@ -21,10 +25,9 @@ import { equipoController } from './equipos/equipo.controller';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([EquipoEntity]), 
-    JugadorModule],
-  controllers: [AppController, equipoController],
-  providers: [AppService, equipoService],
+    TypeOrmModule.forFeature([Equipo, Jugador, Campeonato, Partido, Resultado])],
+  controllers: [AppController, equipoController, JugadorController],
+  providers: [AppService, equipoService, JugadorService],
 })
 export class AppModule { }
 
